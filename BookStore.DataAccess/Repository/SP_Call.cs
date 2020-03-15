@@ -49,7 +49,7 @@ namespace BookStore.DataAccess.Repository
             using (SqlConnection sqlCon = new SqlConnection(ConnectionString))
             {
                 sqlCon.Open();
-                var result = SqlMapperQuerryMultiple(sqlCon, procedureName, param, commandType: System.Data.CommandType.StoredProcedure);
+                var result = SqlMapper.QueryMultiple(sqlCon, procedureName, param, commandType: System.Data.CommandType.StoredProcedure);
                 var item1 = result.Read<T1>().ToList();
                 var item2 = result.Read<T2>().ToList();
                 
