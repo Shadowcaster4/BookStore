@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookStore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class CompanyController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CategoryController(IUnitOfWork unitOfWork)
+        public CompanyController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -24,58 +24,58 @@ namespace BookStore.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            Category category = new Category();
+            Company company = new Company();
             if (id == null)
             {
-                //create new category
-                return View(category);
+                //create new company
+                return View(company);
             }
-            //edit existing category
-            category = _unitOfWork.Category.Get(id.GetValueOrDefault());
-            if(category == null)
+            //edit existing company
+            company = _unitOfWork.Company.Get(id.GetValueOrDefault());
+            if(company == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(company);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(Category category)
+        public IActionResult Upsert(Company company)
         {
             if(ModelState.IsValid)
             {
-                if(category.Id==0)
+                if(company.Id==0)
                 {
-                    _unitOfWork.Category.Add(category);
+                    _unitOfWork.Company.Add(company);
                
                 }
                 else
                 {
-                    _unitOfWork.Category.Update(category);
+                    _unitOfWork.Company.Update(company);
 
                 }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            return View(company);
         }
 
         #region API CALLS
         [HttpGet]
         public IActionResult GetAll()
         {
-            var allObj = _unitOfWork.Category.GetAll();
+            var allObj = _unitOfWork.Company.GetAll();
             return Json(new { data = allObj });
         }
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var objFromDb = _unitOfWork.Category.Get(id);
+            var objFromDb = _unitOfWork.Company.Get(id);
             if(objFromDb == null)
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
-            _unitOfWork.Category.Remove(objFromDb);
+            _unitOfWork.Company.Remove(objFromDb);
             _unitOfWork.Save();
             return Json(new { success = true, message = "Delete Successful" });
         }

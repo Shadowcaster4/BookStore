@@ -11,7 +11,7 @@ namespace BookStore.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(100)]
-        [Display(Name="Book Title")]
+        [Display(Name="Cover Type")]
         public string Name { get; set; }
     }
 }
