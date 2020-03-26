@@ -28,7 +28,7 @@ namespace BookStore.Areas.Identity.Pages.Account
         {
             if (userId == null || code == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToPage("Index","HomeController",new { area = "Customer" });
             }
 
             var user = await _userManager.FindByIdAsync(userId);

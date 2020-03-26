@@ -37,9 +37,20 @@ namespace BookStore
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LoginPath = $"/Identity/Account/Logout";
+                options.LoginPath = $"/Identity/Account/AccessDenied";
+            });
+            services.AddAuthentication().AddGoogle(options=> {
+                options.ClientId = "1097300235606-b31g923201djikrjljdoqgpte6qrkfnc.apps.googleusercontent.com";
+                options.ClientSecret = "Xp-smXol_Pugms72FhNej7VA";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

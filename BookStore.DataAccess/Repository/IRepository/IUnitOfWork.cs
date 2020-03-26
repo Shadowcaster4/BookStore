@@ -11,6 +11,9 @@ namespace BookStore.DataAccess.Repository.IRepository
         ICompanyRepository Company { get; }
         IApplicationUserRepository ApplicationUser { get; }
         IProductRepository Product { get; }
+        IOrderHeaderRepository OrderHeader { get; }
+        IOrderDetailsRepository OrderDetails { get; }
+        IShoppingCartRepository ShoppingCart { get; }
         ISP_Call SP_Call { get; }
 
         void Save();
