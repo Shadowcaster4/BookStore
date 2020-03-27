@@ -112,7 +112,7 @@ namespace BookStore.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("orderDetails");
+                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("BookStore.Models.OrderHeader", b =>
@@ -248,7 +248,7 @@ namespace BookStore.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("shoppingCarts");
+                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
