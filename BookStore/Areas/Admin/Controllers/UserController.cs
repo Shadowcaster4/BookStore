@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using BookStore.DataAccess.Data;
 using BookStore.DataAccess.Repository.IRepository;
@@ -27,7 +28,22 @@ namespace BookStore.Areas.Admin.Controllers
             return View();
         }
 
-       [HttpPost]
+        public IActionResult Test()
+        {
+            Expression<Func<ApplicationUser, bool>> expression = u =>  u.Name.Length>3 ;
+            var x = GetUsers(expression);
+            return View(x);
+        }
+
+        public IEnumerable<ApplicationUser> GetUsers(Expression<Func<ApplicationUser, bool>> filterPredicate)
+        {
+            IEnumerable<ApplicationUser> users = _db.ApplicationUsers.ToList().AsQueryable().Where(filterPredicate);
+            return users;
+
+        }
+
+
+        [HttpPost]
        public IActionResult LockUnlock([FromBody] string id)
         {
             var objFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == id);

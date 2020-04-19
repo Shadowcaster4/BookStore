@@ -18,6 +18,8 @@ namespace BookStore.Models
         public DateTime OrderDate { get; set; }
         [Required]
         public DateTime ShippingDate { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public DateTime PaymentDueDate { get; set; }
         [Required]
         public double OrderTotal { get; set; }
         public string TrackingNumber { get; set; }
@@ -25,12 +27,17 @@ namespace BookStore.Models
         public string OrderStatus { get; set; }
         public string PaymentStatus { get; set; }
         public string TransactionId { get; set; }
-
+        [Required]
         public string PhoneNumber { get; set; }
+        [Required]
         public string StreetAddress { get; set; }
+        [Required]
         public string City { get; set; }
+        [Required]
         public string State { get; set; }
+        [Required]
         public string PostalCode { get; set; }
+        [Required]
         public string Name { get; set; }
 
     }
